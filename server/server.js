@@ -7,40 +7,29 @@ const userRoutes = require("./routes/userRoutes");
 dotenv.config();
 const app = express();
 
-// =======================
 // Middleware
-// =======================
+app.use(cors());
 app.use(express.json());
-
-// ✅ Use only one CORS config
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://forty4technology.vercel.app"],
+    origin: [
+      "http://localhost:3000", // React local dev
+      "https://forty4technology.vercel.app", // deployed frontend
+    ],
     credentials: true,
   })
 );
 
-// =======================
 // MongoDB Connection
-// =======================
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// =======================
 // Routes
-// =======================
 app.use("/api/users", userRoutes);
 
-// ✅ Health check route (for Render)
-app.get("/", (req, res) => {
-  res.send("🚀 API is running...");
-});
-
-// =======================
 // Start server
-// =======================
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
