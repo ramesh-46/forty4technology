@@ -11,6 +11,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(cors({
+  origin: "https://forty4technology.vercel.app",
+  credentials: true
+}));
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI)
