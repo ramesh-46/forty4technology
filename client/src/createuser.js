@@ -54,7 +54,7 @@ export default function CreateUserPage() {
     if (validateForm()) {
       setIsSubmitting(true);
       axios
-        .post("http://localhost:5000/api/users", newUser)
+        .post("https://forty4technology-backend.onrender.com/api/users", newUser)
         .then(() => (window.location.href = "/"))
         .catch((err) => {
           console.error(err);

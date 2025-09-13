@@ -508,7 +508,7 @@ const [loading, setLoading] = useState(false); // 👈 Add this
 
 const fetchAllUsers = () => {
   setLoading(true); // 👈 Start loading
-  axios.get('http://localhost:5000/api/users')
+  axios.get('https://forty4technology-backend.onrender.com/api/users')
     .then(res => {
       setUsers(res.data);
       alert('Users fetched successfully!');
@@ -525,7 +525,7 @@ const fetchAllUsers = () => {
 const fetchUserById = () => {
   if (!getById.trim()) return;
   setLoading(true);
-  axios.get(`http://localhost:5000/api/users/${getById}`)
+  axios.get(`https://forty4technology-backend.onrender.com/api/users/${getById}`)
     .then(res => {
       setUsers([res.data]); // 👈 Only show this one user
       alert('User fetched successfully!');
@@ -546,7 +546,7 @@ const fetchUserById = () => {
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
-      axios.delete(`http://localhost:5000/api/users/${id}`)
+      axios.delete(`https://forty4technology-backend.onrender.com/api/users/${id}`)
         .then(() => {
           setUsers(users.filter(user => user._id !== id));
           alert('User deleted successfully!');
@@ -564,7 +564,7 @@ const fetchUserById = () => {
   };
 
   const handleSubmitEdit = (updatedUser) => {
-    axios.put(`http://localhost:5000/api/users/${updatedUser._id}`, updatedUser)
+    axios.put(`https://forty4technology-backend.onrender.com/api/users/${updatedUser._id}`, updatedUser)
       .then(res => {
         setUsers(users.map(user => user._id === res.data._id ? res.data : user));
         setShowEditModal(false);
