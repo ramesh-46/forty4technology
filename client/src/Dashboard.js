@@ -508,9 +508,10 @@ const [loading, setLoading] = useState(false); // 👈 Add this
 
 const fetchAllUsers = () => {
   setLoading(true); // 👈 Start loading
-  axios.get('https://forty4technology-backend.onrender.com/api/users')
+  axios.get('http://forty4technology.vercel.app/api/users')
     .then(res => {
-      setUsers(res.data);
+setUsers(Array.isArray(res.data) ? res.data : res.data.users || []);
+
       alert('Users fetched successfully!');
     })
     .catch(err => {
@@ -525,7 +526,7 @@ const fetchAllUsers = () => {
 const fetchUserById = () => {
   if (!getById.trim()) return;
   setLoading(true);
-  axios.get(`https://forty4technology-backend.onrender.com/api/users/${getById}`)
+  axios.get(`https://forty4technology.vercel.app/api/users/${getById}`)
     .then(res => {
       setUsers([res.data]); // 👈 Only show this one user
       alert('User fetched successfully!');
@@ -546,7 +547,7 @@ const fetchUserById = () => {
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
-      axios.delete(`https://forty4technology-backend.onrender.com/api/users/${id}`)
+      axios.delete(`https://forty4technology.vercel.app/api/users/${id}`)
         .then(() => {
           setUsers(users.filter(user => user._id !== id));
           alert('User deleted successfully!');
@@ -565,7 +566,7 @@ const fetchUserById = () => {
 
 const handleSubmitEdit = (updatedUser) => {
   axios
-    .put(`https://forty4technology-backend.onrender.com/api/users/${updatedUser._id}`, updatedUser)
+    .put(`https://forty4technology.vercel.app/api/users/${updatedUser._id}`, updatedUser)
     .then((res) => {
       setUsers(users.map(user => user._id === res.data._id ? res.data : user));
       setShowEditModal(false);
@@ -1338,7 +1339,6 @@ if (typeof window !== 'undefined') {
   window.addEventListener('resize', resizeHandler);
   resizeHandler();
 }
-
 
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
