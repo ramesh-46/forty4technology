@@ -508,7 +508,7 @@ const [loading, setLoading] = useState(false); // 👈 Add this
 
 const fetchAllUsers = () => {
   setLoading(true); // 👈 Start loading
-  axios.get('http://forty4technology.vercel.app/api/users')
+  axios.get('https://forty4technology.vercel.app/api/users')
     .then(res => {
 setUsers(Array.isArray(res.data) ? res.data : res.data.users || []);
 
