@@ -51,15 +51,10 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const updatedUserData = req.body;
 
-    // Ensure the _id in the body matches the URL param (optional but recommended)
-    if (updatedUserData._id && updatedUserData._id !== id) {
-      return res.status(400).json({ error: 'User ID in body and URL must match' });
-    }
-
     const user = await User.findByIdAndUpdate(
       id,
       updatedUserData,
-      { new: true, runValidators: true } // `new: true` returns the updated doc, `runValidators` ensures schema validation
+      { new: true, runValidators: true }
     );
 
     if (!user) {
@@ -72,6 +67,7 @@ router.put('/:id', async (req, res) => {
     res.status(400).json({ error: 'Failed to update user', details: err.message });
   }
 });
+
 
 
 // @desc    Delete a user
